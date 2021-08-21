@@ -42,10 +42,25 @@
               @csrf
               <div class="input-group mb-3">
                 <input type="text" class="form-control" name="title" placeholder="Titulo da Aula">
-                <div class="input-group-append">
-                </div>
+                <select name="teacher">
+                  <option disabled selected value="">Selecione o professor da matéria</option>
+                    @if($teachers == [])
+                      <option disabled value="">Não há professores cadastrados</option>
+                    @endif
+                    @foreach($teachers as $teacher)
+                      <option value="{{$teacher->id}}">{{$teacher->name}}</option>
+                    @endforeach
+                </select>
+                <select placeholder="Selecione a matéria da aula" name="theme">
+                  <option disabled selected value="">Selecione a matéria da aula</option>
+                    @if($themes == [])
+                      <option disabled value="">Não há materias cadastradas</option>
+                    @endif
+                    @foreach($themes as $theme)
+                      <option value="{{$theme->id}}">{{$theme->name}}</option>
+                    @endforeach
+                </select>
               </div>
-
             <textarea name="description"></textarea>
 
             <div class="row">
@@ -58,6 +73,15 @@
         </div>
       </div>
     </div>
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
 
 
 <!-- jQuery -->

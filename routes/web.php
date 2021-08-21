@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\RegisteredClassroomController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisteredClassroomUserController;
+use App\Models\Classroom;
+use App\Models\Notification as ModelsNotification;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +24,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $classrooms = Classroom::all();
+    if(count($classrooms) == 0 ) {
+        $classrooms = [];
+    }
+
+    return view('dashboard')->with(['classrooms' => $classrooms]);
 })->middleware(['auth'])->name('dashboard');
+
 
 require __DIR__.'/auth.php';

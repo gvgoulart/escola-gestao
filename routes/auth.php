@@ -8,14 +8,20 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\ListClassroomsController;
+use App\Http\Controllers\ListNotificationsController;
+use App\Http\Controllers\ListThemesController;
+use App\Http\Controllers\ListUsersController;
 use App\Http\Controllers\RegisteredClassroomController;
+use App\Http\Controllers\RegisteredClassroomUserController;
+use App\Http\Controllers\RegisteredThemeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/register', [RegisteredUserController::class, 'create'])
+Route::get('/dashboard/register', [RegisteredUserController::class, 'create'])
                 ->middleware('auth')
-                ->name('register');
+                ->name('register-user');
 
-Route::post('/register', [RegisteredUserController::class, 'store'])
+Route::post('/dashboard/register', [RegisteredUserController::class, 'store'])
                 ->middleware('auth')
                 ->name('registerStore');
 
@@ -66,11 +72,55 @@ Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
 
-Route::get('/classroom', [RegisteredClassroomController::class, 'index'])
+Route::get('/dashboard/classroom', [RegisteredClassroomController::class, 'index'])
                 ->middleware('auth')
                 ->name('classroom');
 
-Route::post('/classroom/create', [RegisteredClassroomController::class, 'create'])
+Route::post('/dashboard/classroom/create', [RegisteredClassroomController::class, 'create'])
                 ->middleware('auth')
                 ->name('classroom.create');
+
+Route::get('/dashboard/theme', [RegisteredThemeController::class, 'index'])
+            ->middleware('auth')
+            ->name('register-theme');
+
+Route::post('/dashboard/theme', [RegisteredThemeController::class, 'create'])
+            ->middleware('auth')
+            ->name('register.store');
+
+Route::get('/dashboard/list/users', [ListUsersController::class, 'index'])
+            ->middleware('auth')
+            ->name('list.users');
+
+Route::get('/dashboard/list/themes', [ListThemesController::class, 'index'])
+            ->middleware('auth')
+            ->name('list.themes');
+
+Route::get('/dashboard/list/classrooms', [ListClassroomsController::class, 'index'])
+            ->middleware('auth')
+            ->name('list.classrooms');
+
+Route::get('/dashboard/participate/{id}', [RegisteredClassroomController::class, 'requestParticipation'])
+            ->middleware('auth')
+            ->name('request-classroom');
+
+Route::get('/dashboard/list/notifications', [ListNotificationsController::class, 'index'])
+            ->middleware('auth')
+            ->name('list-notifications');
+
+Route::get('/dashboard/list/notifications/student', [ListNotificationsController::class, 'indexStudent'])
+            ->middleware('auth')
+            ->name('list-notifications-student');
+
+Route::get('/dashboard/list/notifications/markAsRead/{id}', [ListNotificationsController::class, 'markAsRead'])
+            ->middleware('auth')
+            ->name('markAsRead');
+
+Route::get('/dashboard/accept/{id}{user_id}{classroom_id}', [RegisteredClassroomUserController::class, 'store'])
+            ->middleware('auth')
+            ->name('participate-classroom');
+
+Route::get('/dashboard/deny/{id}{user_id}{classroom_id}', [RegisteredClassroomUserController::class, 'deny'])
+            ->middleware('auth')
+            ->name('deny-classroom');
 

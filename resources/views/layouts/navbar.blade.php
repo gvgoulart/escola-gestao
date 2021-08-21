@@ -16,12 +16,29 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          <span class="badge badge-warning navbar-badge">
+            @if(count(Auth::user()->unreadNotifications ) > 0) 
+              {{count(Auth::user()->unreadNotifications )}}
+            @else
+            0
+            @endif
+          </span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <span class="dropdown-item dropdown-header">
+            @if(count(Auth::user()->unreadNotifications ) > 0) 
+              {{count(Auth::user()->unreadNotifications )}} Notificações
+            @else
+             0 Notificações
+            @endif
+
+          </span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">Veja todas as notificações</a>
+          @if(!Auth::user()->hasRole('aluno'))
+          <a href="{{route('list-notifications')}}" class="dropdown-item dropdown-footer">Veja todas as notificações</a>
+          @else
+          <a href="{{route('list-notifications-student')}}" class="dropdown-item dropdown-footer">Veja todas as notificações</a>
+          @endif
         </div>
       </li>
     </ul>

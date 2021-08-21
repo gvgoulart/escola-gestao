@@ -15,12 +15,20 @@ class CreateClassroomsTable extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('creator');
+            $table->unsignedBigInteger('creator_id');
+            $table->unsignedBigInteger('teacher_id');
+            $table->unsignedBigInteger('theme_id');
             $table->string('title');
             $table->text('description');
             $table->timestamps();
 
-            $table->foreign('creator')->references('id')->on('users')
+            $table->foreign('creator_id')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->foreign('teacher_id')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->foreign('theme_id')->references('id')->on('themes')
             ->onUpdate('cascade')->onDelete('cascade');
         });
     }
