@@ -2,28 +2,100 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\ListClassroomsController;
-use App\Http\Controllers\ListNotificationsController;
-use App\Http\Controllers\ListThemesController;
-use App\Http\Controllers\ListUsersController;
-use App\Http\Controllers\RegisteredClassroomController;
-use App\Http\Controllers\RegisteredClassroomUserController;
-use App\Http\Controllers\RegisteredThemeController;
+use App\Http\Controllers\ListControllers\ListClassroomsController;
+use App\Http\Controllers\ListControllers\ListNotificationsController;
+use App\Http\Controllers\ListControllers\ListThemesController;
+use App\Http\Controllers\ListControllers\ListUsersController;
+use App\Http\Controllers\RegisteredControllers\RegisteredClassroomController;
+use App\Http\Controllers\RegisteredControllers\RegisteredClassroomUserController;
+use App\Http\Controllers\RegisteredControllers\RegisteredThemeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard/register', [RegisteredUserController::class, 'create'])
-                ->middleware('auth')
+Route::group(['middleware' => ['auth', 'role:admin|aluno|professor']], function() {
+    
+    Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
+            ->name('logout');
+            
+    Route::get('/dashboard/participate/{id}', [RegisteredClassroomController::class, 'requestParticipation'])
+            ->name('request-classroom');
+
+    Route::get('/dashboard/list/notifications/student', [ListNotificationsController::class, 'indexStudent'])
+            ->name('list-notifications-student');
+
+    Route::get('/dashboard/list/notifications/markAsRead/{id}', [ListNotificationsController::class, 'markAsRead'])
+            ->name('markAsRead');
+ });
+
+ Route::group(['middleware' => ['auth', 'role:admin|professor']], function() {
+
+    Route::get('/dashboard/register/user', [RegisteredUserController::class, 'create'])
                 ->name('register-user');
 
-Route::post('/dashboard/register', [RegisteredUserController::class, 'store'])
-                ->middleware('auth')
+    Route::post('/dashboard/register', [RegisteredUserController::class, 'store'])
                 ->name('registerStore');
+
+    Route::get('/dashboard/classroom', [RegisteredClassroomController::class, 'index'])
+                ->name('classroom');
+
+    Route::post('/dashboard/classroom/create', [RegisteredClassroomController::class, 'create'])
+                ->name('classroom.create');
+
+    Route::get('/dashboard/theme', [RegisteredThemeController::class, 'index'])
+            ->name('register-theme');
+
+    Route::post('/dashboard/theme', [RegisteredThemeController::class, 'create'])
+            ->name('register.store');
+
+    Route::get('/dashboard/list/users', [ListUsersController::class, 'index'])
+            ->name('list.users');
+
+    Route::get('/dashboard/list/users/delete/{id}', [ListUsersController::class, 'delete'])
+            ->name('delete-user');
+
+    Route::get('/dashboard/list/users/edit/{id}', [ListUsersController::class, 'edit'])
+            ->name('edit-user');
+
+    Route::post('/dashboard/list/users/edit/{id}', [ListUsersController::class, 'editAction'])
+            ->name('edit-userAction');
+
+    Route::get('/dashboard/list/themes', [ListThemesController::class, 'index'])
+            ->name('list.themes');
+
+    Route::get('/dashboard/list/themes/delete/{id}', [ListThemesController::class, 'delete'])
+            ->name('delete-theme');
+
+    Route::get('/dashboard/list/themes/edit/{id}', [ListThemesController::class, 'edit'])
+            ->name('edit-theme');
+
+    Route::post('/dashboard/list/themes/delete/{id}', [ListThemesController::class, 'editAction'])
+            ->name('edit-themeAction');
+
+    Route::get('/dashboard/list/classrooms', [ListClassroomsController::class, 'index'])
+            ->name('list.classrooms');
+
+    Route::get('/dashboard/list/classrooms/delete/{id}', [ListClassroomsController::class, 'delete'])
+            ->name('delete-classroom');
+
+    Route::get('/dashboard/list/classrooms/edit/{id}', [ListClassroomsController::class, 'edit'])
+            ->name('edit-classroom');
+
+    Route::post('/dashboard/list/classrooms/edit/{id}', [ListClassroomsController::class, 'editAction'])
+            ->name('edit-classroomAction');
+
+        Route::get('/dashboard/list/notifications', [ListNotificationsController::class, 'index'])
+            ->name('list-notifications');
+
+        Route::get('/dashboard/accept/{id}/{user_id}/{classroom_id}', [RegisteredClassroomUserController::class, 'store'])
+            ->name('participate-classroom');
+
+        Route::get('/dashboard/deny/{id}/{user_id}/{classroom_id}', [RegisteredClassroomUserController::class, 'deny'])
+            ->name('deny-classroom');
+
+ });
+
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->middleware('guest')
@@ -48,18 +120,6 @@ Route::post('/reset-password', [NewPasswordController::class, 'store'])
                 ->middleware('guest')
                 ->name('password.update');
 
-Route::get('/verify-email', [EmailVerificationPromptController::class, '__invoke'])
-                ->middleware('auth')
-                ->name('verification.notice');
-
-Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
-                ->middleware(['auth', 'signed', 'throttle:6,1'])
-                ->name('verification.verify');
-
-Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-                ->middleware(['auth', 'throttle:6,1'])
-                ->name('verification.send');
-
 Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
                 ->middleware('auth')
                 ->name('password.confirm');
@@ -67,60 +127,5 @@ Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
 Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store'])
                 ->middleware('auth');
 
-Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->middleware('auth')
-                ->name('logout');
 
-
-Route::get('/dashboard/classroom', [RegisteredClassroomController::class, 'index'])
-                ->middleware('auth')
-                ->name('classroom');
-
-Route::post('/dashboard/classroom/create', [RegisteredClassroomController::class, 'create'])
-                ->middleware('auth')
-                ->name('classroom.create');
-
-Route::get('/dashboard/theme', [RegisteredThemeController::class, 'index'])
-            ->middleware('auth')
-            ->name('register-theme');
-
-Route::post('/dashboard/theme', [RegisteredThemeController::class, 'create'])
-            ->middleware('auth')
-            ->name('register.store');
-
-Route::get('/dashboard/list/users', [ListUsersController::class, 'index'])
-            ->middleware('auth')
-            ->name('list.users');
-
-Route::get('/dashboard/list/themes', [ListThemesController::class, 'index'])
-            ->middleware('auth')
-            ->name('list.themes');
-
-Route::get('/dashboard/list/classrooms', [ListClassroomsController::class, 'index'])
-            ->middleware('auth')
-            ->name('list.classrooms');
-
-Route::get('/dashboard/participate/{id}', [RegisteredClassroomController::class, 'requestParticipation'])
-            ->middleware('auth')
-            ->name('request-classroom');
-
-Route::get('/dashboard/list/notifications', [ListNotificationsController::class, 'index'])
-            ->middleware('auth')
-            ->name('list-notifications');
-
-Route::get('/dashboard/list/notifications/student', [ListNotificationsController::class, 'indexStudent'])
-            ->middleware('auth')
-            ->name('list-notifications-student');
-
-Route::get('/dashboard/list/notifications/markAsRead/{id}', [ListNotificationsController::class, 'markAsRead'])
-            ->middleware('auth')
-            ->name('markAsRead');
-
-Route::get('/dashboard/accept/{id}{user_id}{classroom_id}', [RegisteredClassroomUserController::class, 'store'])
-            ->middleware('auth')
-            ->name('participate-classroom');
-
-Route::get('/dashboard/deny/{id}{user_id}{classroom_id}', [RegisteredClassroomUserController::class, 'deny'])
-            ->middleware('auth')
-            ->name('deny-classroom');
 

@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{asset('escola/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('escola/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 
   {{-- Navbar  --}}
@@ -40,6 +41,8 @@
               <tr>
                 <th>ID</th>
                 <th>Nome da matéria</th>
+                <th>Editar</th>
+                <th>Excluir</th>
               </tr>
             </thead>
             <tbody>
@@ -47,6 +50,8 @@
               <tr>
                 <td>{{$theme->id}}</td>
                 <td>{{$theme->name}}</td>
+                <td><a href="{{route('edit-theme', ['id' => $theme->id])}}"><i class="bi bi-pencil-square"></a></i></td>
+                <td><a href="{{route('delete-theme', ['id' => $theme->id])}}"><i class="bi bi-trash-fill"></i></a></td>
               </tr>
               @endforeach
             </tbody>

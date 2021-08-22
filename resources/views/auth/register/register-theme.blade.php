@@ -16,10 +16,8 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-   {{-- Tela de carregamento --}}
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class=" brand-image img-circle elevation-3 animation__shake" src="escola/dist/img/VT2sJYUg_400x400.jpg" style="opacity: .8" alt="AdminLTELogo" height="60" width="60">
-  </div>
+<div class="wrapper">
+
 
   {{-- Navbar  --}}
  @extends('layouts.navbar') 
@@ -28,43 +26,26 @@
     {{-- Navbar aside --}}
      @extends('layouts.main-sidebar')
     {{-- /.navbar aside--}}
-
-
-   {{-- Conteúdo da página --}}
-  <div class="content-wrapper">
-     {{-- Conteúdo do cabeçalho --}}
+    <div class="content-wrapper">
       <div class="content-header">
-        <div id="classroom-container" class="row">
-        @foreach($classrooms as $classroom)
-      <div class="card col-md-4">
-        <div class="card-body">
-          <h5 class="card-title"><b>{{ $classroom->title }}</b></h5>
-          <p class="card-text">{{$classroom->description}}</p>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Olá {{Auth::user()->roles[0]->name}}!</a></li>
+            <li class="breadcrumb-item active">Escola Irroba</li>
+          </ol>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{$classroom->theme->name}}</li>
-          <li class="list-group-item">{{$classroom->teacher->name}}</li>
-          <li class="list-group-item">{{count($classroom->students)}} Alunos</li>
-        </ul>
-        <div class="card-body">
-          <a href="" class="btn btn-primary">Saber mais</a>
-          @if(Auth::user()->hasRole('aluno')) 
-          <a href="{{route('request-classroom', ['id' => $classroom->id])}}" class="btn btn-primary">
-            Participar
-          </a> 
-          @endif
-        </div>
-      </div>
-      @endforeach
-
-    </div>
-      </div>
- 
-      
+      </div>  
+        <div class="container-fluid">
+              <form action="{{route('register-theme')}}" method="POST">
+                @csrf
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" name="name">
+                </div>
   
-  </div>
-  {{-- /.Conteúdo do cabeçalho --}}
-
+                    <button type="submit" class="btn btn-primary btn-block">Editar Matéria</button>
+              </form>
+        </div>
+    </div>
 
 <!-- jQuery -->
 <script src="{{asset('escola/plugins/jquery/jquery.min.js')}}"></script>
@@ -82,5 +63,4 @@
 <script src="{{asset('escola/dist/js/adminlte.js')}}"></script>
 </body>
 </html>
-
 @endsection

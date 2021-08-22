@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RegisteredControllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Classroom;
-use App\Models\ClassroomUser;
-use App\Models\NotificationRequirement;
 use App\Notifications\NotificationClassroom;
 use App\Models\Theme;
 use App\Models\User;
@@ -31,7 +30,7 @@ class RegisteredClassroomController extends Controller
                 $themes = [];
         }
 
-        return view('auth.register-classroom', ['themes' => $themes, 
+        return view('auth.register.register-classroom', ['themes' => $themes, 
                                                 'teachers' => $teachers]);
     }
 

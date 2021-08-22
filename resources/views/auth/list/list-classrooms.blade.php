@@ -29,7 +29,7 @@
   <div class="content-wrapper">
      {{-- Conteúdo do cabeçalho --}}
       <div class="content-header">
-        <h1 style="text-align: center">Matérias</h1>
+        <h1 style="text-align: center">Aulas</h1>
       </div>
 <div class="row" style="width: 100%">
     <div class="col-12">
@@ -39,28 +39,27 @@
           <table class="table table-hover text-nowrap">
             <thead>
               <tr>
-                <th>Nome da matéria</th>
-                <th>Motivo</th>
-                <th>Marcar como lida</th>
+                <th>ID</th>
+                <th>Nome da Aula</th>
+                <th>Criador</th>
+                <th>Professor</th>
+                <th>Matéria</th>
+                <th>Editar</th>
+                <th>Excluir</th>
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    @if($theme != [])
-                        <td>{{$theme}}</td>
-                    @endif
-                    @if($reason != [])
-                        <td>{{$reason}}</td>
-                    @endif
-                    @if($notification != [])
-                        <td>
-                            <a href="{{route('markAsRead', ['id' => $notification->id])}}">
-                                <i class="bi bi-check-circle">
-                                </i>
-                            </a>
-                        </td>
-                    @endif
-                </tr>
+                @foreach($classrooms as $classroom)
+              <tr>
+                <td>{{$classroom->id}}</td>
+                <td>{{$classroom->title}}</td>
+                <td>{{$classroom->creator->name}}</td>
+                <td>{{$classroom->teacher->name}}</td>
+                <td>{{$classroom->theme->name}}</td>
+                <td><a href="{{route('edit-classroom', ['id' => $classroom->id])}}"><i class="bi bi-pencil-square"></a></i></td>
+                <td><a href="{{route('delete-classroom', ['id' => $classroom->id])}}"><i class="bi bi-trash-fill"></i></a></td>
+              </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

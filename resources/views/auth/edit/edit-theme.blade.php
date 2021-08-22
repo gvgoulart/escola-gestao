@@ -27,25 +27,25 @@
      @extends('layouts.main-sidebar')
     {{-- /.navbar aside--}}
     <div class="content-wrapper">
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-              </div>
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Olá {{Auth::user()->roles[0]->name}}!</a></li>
-                  <li class="breadcrumb-item active">Escola Irroba</li>
-                </ol>
-              </div>
-              <h1 style="text-align:center">Matérias</h1>
-              <form action="{{route('register.store')}}" method="POST">
-                  @csrf
-              <input type="text" name="name" placeholder="Nome da matéria">
-              <input type="submit">
-            </div>
-          </div>
+      <div class="content-header">
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Olá {{Auth::user()->roles[0]->name}}!</a></li>
+            <li class="breadcrumb-item active">Escola Irroba</li>
+          </ol>
         </div>
+      </div>  
+        <div class="container-fluid">
+              <form action="{{route('edit-themeAction', ['id' => $theme->id])}}" method="POST">
+                @csrf
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" value="{{$theme->name}}"name="name">
+                </div>
+  
+                    <button type="submit" class="btn btn-primary btn-block">Editar Matéria</button>
+              </form>
+        </div>
+    </div>
 
 <!-- jQuery -->
 <script src="{{asset('escola/plugins/jquery/jquery.min.js')}}"></script>

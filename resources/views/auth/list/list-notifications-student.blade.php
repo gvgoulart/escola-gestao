@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{asset('escola/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('escola/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 
   {{-- Navbar  --}}
@@ -28,7 +29,7 @@
   <div class="content-wrapper">
      {{-- Conteúdo do cabeçalho --}}
       <div class="content-header">
-        <h1 style="text-align: center">Aulas</h1>
+        <h1 style="text-align: center">Notificações</h1>
       </div>
 <div class="row" style="width: 100%">
     <div class="col-12">
@@ -38,23 +39,28 @@
           <table class="table table-hover text-nowrap">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Nome da Aula</th>
-                <th>Criador</th>
-                <th>Professor</th>
-                <th>Matéria</th>
+                <th>Nome da matéria</th>
+                <th>Motivo</th>
+                <th>Marcar como lida</th>
               </tr>
             </thead>
             <tbody>
-                @foreach($classrooms as $classroom)
-              <tr>
-                <td>{{$classroom->id}}</td>
-                <td>{{$classroom->title}}</td>
-                <td>{{$classroom->creator->name}}</td>
-                <td>{{$classroom->teacher->name}}</td>
-                <td>{{$classroom->theme->name}}</td>
-              </tr>
-              @endforeach
+                <tr>
+                    @if($theme != [])
+                        <td>{{$theme}}</td>
+                    @endif
+                    @if($reason != [])
+                        <td>{{$reason}}</td>
+                    @endif
+                    @if($notification != [])
+                        <td>
+                            <a href="{{route('markAsRead', ['id' => $notification->id])}}">
+                                <i class="bi bi-check-circle">
+                                </i>
+                            </a>
+                        </td>
+                    @endif
+                </tr>
             </tbody>
           </table>
         </div>

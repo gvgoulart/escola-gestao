@@ -59,9 +59,13 @@
         </div>
         <div class="input-group mb-3">
             <select name="role_id" class="form-control">
+              @if(Auth::user()->hasRole('professor'))
+                <option selected value="3">Aluno</option>
+              @elseif(Auth::user()->hasRole('admin'))
                 @foreach($roles as $role)
                     <option value="{{$role->id}}">{{$role->display_name}}</option>
                 @endforeach
+              @endif
             </select>
             <div class="input-group-append">
               <div class="input-group-text">

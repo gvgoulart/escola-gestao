@@ -33,7 +33,7 @@ body{
 }
 
 .img img{
-	width: 350px;
+	width: 450px;
 }
 
 form{
@@ -160,7 +160,7 @@ a:hover{
 	border-radius: 25px;
 	outline: none;
 	border: none;
-	background-image: linear-gradient(to right, #be3232, #d33838, #be3232);
+	background-image: linear-gradient(to right, #ff0505, #ff3131, #ff0000);
 	background-size: 200%;
 	font-size: 1.2rem;
 	color: #fff;

@@ -29,7 +29,7 @@
   <div class="content-wrapper">
      {{-- Conteúdo do cabeçalho --}}
       <div class="content-header">
-        <h1 style="text-align: center">Matérias</h1>
+        <h1 style="text-align: center">Notificações</h1>
       </div>
 <div class="row" style="width: 100%">
     <div class="col-12">
@@ -46,15 +46,15 @@
               </tr>
             </thead>
             <tbody>
-                @foreach($notifications as $notification)
+                @foreach(Auth::user()->unreadNotifications as $notification)
                     @foreach($notification->data as $data)
                         <tr>
                             <td>{{$data['user_name']}}</td>
                             <td>{{$data['classroom_name']}}</td>
                             <td>
                                 <a href="{{route('participate-classroom', ['id' => $notification->id,
-                                                                            'user_id' =>$data['user_id'],
-                                                                            'classroom_id' => $data['classroom_id']])}}" 
+                                                                            'user_id' => $user_id,
+                                                                            'classroom_id' => $classroom_id])}}" 
                                                                         style="color:green" type="button">
                                     <i class="bi bi-check-circle">
                                     </i>
@@ -76,19 +76,23 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-      @foreach($notifications as $notification)
+      @foreach(Auth::user()->unreadNotifications as $notification)
                     @foreach($notification->data as $data)
-        <form  id="reason" action="{{route('deny-classroom', ['id' => $notification->id, 
-                                                'user_id' =>$data['user_id'], 
-                                                'classroom_id' => $data['classroom_id']])}}" 
-                                                method="GET">
+                    @php
+                     $user_id = $data['user_id'];
+                     $classroom_id = $data['classroom_id'];
+                    @endphp
+        <form  id="reason" action="{{route('deny-classroom', ['id' => $notification->id,
+                                                              'user_id' => $user_id,
+                                                              'classroom_id' => $classroom_id
+                                                              ])}}" method="GET">
             @csrf
                 <div>
                 
                 </div>
         </form>
-        @endforeach
-        @endforeach
+                    @endforeach
+      @endforeach
 
     </div>
 

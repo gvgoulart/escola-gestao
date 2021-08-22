@@ -13,7 +13,7 @@
         <a href="#" class="d-block">{{Auth::user()->name}}</a>
       </div>
     </div>
-    @if (Auth::user()->hasRole('admin'))
+    @if (Auth::user()->hasRole(['admin', 'professor']))
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>

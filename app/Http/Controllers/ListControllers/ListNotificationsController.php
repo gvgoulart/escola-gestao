@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ListControllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Notification;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ListNotificationsController extends Controller
@@ -11,12 +11,12 @@ class ListNotificationsController extends Controller
     public function index() {
         $notifications = [];
         
-        if(count(Auth::user()->notifications) > 0) { 
-            $notifications = Auth::user()->notifications;
+        if(count(Auth::user()->unreadNotifications) > 0) { 
+            $notifications = Auth::user()->unreadNotifications;
         }
 
 
-        return view('auth.list-notifications', ['notifications' => $notifications]);
+        return view('auth.list.list-notifications', ['notifications' => $notifications]);
     }
     public function indexStudent() {
         $notifications = [];
@@ -35,18 +35,19 @@ class ListNotificationsController extends Controller
             }
         }
 
-        return view('auth.list-notifications-student', ['notification' => $notification,
+        return view('auth.list.list-notifications-student', ['notification' => $notification,
                                                         'reason' => $reason,
                                                         'theme' => $theme]);
     }
     public function markAsRead($id) {
-         $notificationSelected = Notification::find($id);
+         $notificationSelected = Notification::find($id)->delete();
 
         foreach (Auth::user()->unreadNotifications as $notification) {
             if($notification == $notificationSelected)  { 
                 $notification->markAsRead();
             }
         }
+        return redirect()->back();
     }
 
 }

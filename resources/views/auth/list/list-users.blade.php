@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{asset('escola/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('escola/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 
   {{-- Navbar  --}}
@@ -42,6 +43,8 @@
                 <th>Usuário</th>
                 <th>Email</th>
                 <th>Tipo</th>
+                <th>Editar</th>
+                <th>Excluir</th>
               </tr>
             </thead>
             <tbody>
@@ -50,7 +53,9 @@
                 <td>{{$user->id}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td><span class="tag tag-success">{{$user->roles[0]->name}}</span></td>
+                <td><span class="tag tag-success">{{$user->roles[0]->display_name}}</span></td>
+                <td><a href="{{route('edit-user', ['id' => $user->id])}}"><i class="bi bi-pencil-square"></i></a></td>
+                <td><a href="{{route('delete-user', ['id' => $user->id])}}"><i class="bi bi-trash-fill"></i></a></td
               </tr>
               @endforeach
             </tbody>
