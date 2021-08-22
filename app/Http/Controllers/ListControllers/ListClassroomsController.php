@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ListControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Classroom;
+use App\Models\ClassroomUser;
 use App\Models\Theme;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -69,5 +70,19 @@ class ListClassroomsController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function studentsClassrooms() {
+        $studentsClassrooms = [];
+        $studentsClassroomsUserAll = ClassroomUser::where('user_id', Auth::user()->id)->get();
+
+        if(count($studentsClassroomsUserAll) > 0) {
+            foreach($studentsClassroomsUserAll as $studentsClassroomsAll) {
+            $studentsClassrooms[] = $studentsClassroomsAll;
+             }
+        }
+
+
+        return view('auth.list.list-studentsClassrooms', ['studentsClassrooms' => $studentsClassrooms]);
     }
 }

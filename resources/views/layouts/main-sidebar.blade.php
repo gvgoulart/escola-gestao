@@ -13,6 +13,13 @@
         <a href="#" class="d-block">{{Auth::user()->name}}</a>
       </div>
     </div>
+    @if(Auth::user()->hasRole('aluno'))
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="info">
+        <a href="{{route('list-studentsClassrooms')}}" class="d-block">Ver minhas aulas</a>
+      </div>
+    </div>
+    @endif
     @if (Auth::user()->hasRole(['admin', 'professor']))
           <li class="nav-item">
             <a href="#" class="nav-link">

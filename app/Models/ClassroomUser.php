@@ -13,4 +13,12 @@ class ClassroomUser extends Model
         'user_id',
         'classroom_id'
     ];
+
+    public function teacher() {
+        return $this->hasOne('App\Models\User');
+    }
+
+    public function classroom() {
+        return $this->belongsTo('App\Models\Classroom');
+    }
 }

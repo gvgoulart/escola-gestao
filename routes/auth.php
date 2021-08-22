@@ -96,6 +96,8 @@ Route::group(['middleware' => ['auth', 'role:admin|aluno|professor']], function(
 
  });
 
+Route::get('/dashboard/list/studentsClassrooms', [ListClassroomsController::class, 'studentsClassrooms'])
+        ->name('list-studentsClassrooms');
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->middleware('guest')

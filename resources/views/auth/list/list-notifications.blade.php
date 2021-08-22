@@ -53,8 +53,8 @@
                             <td>{{$data['classroom_name']}}</td>
                             <td>
                                 <a href="{{route('participate-classroom', ['id' => $notification->id,
-                                                                            'user_id' => $user_id,
-                                                                            'classroom_id' => $classroom_id])}}" 
+                                                                            'user_id' => $data['user_id'],
+                                                                            'classroom_id' => $data['classroom_id']])}}" 
                                                                         style="color:green" type="button">
                                     <i class="bi bi-check-circle">
                                     </i>
