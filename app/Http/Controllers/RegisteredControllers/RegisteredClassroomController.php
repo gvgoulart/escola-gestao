@@ -43,8 +43,12 @@ class RegisteredClassroomController extends Controller
             'teacher' => 'required',
             'theme' => 'required',
             'title' => 'required',
-            'description' => 'required' ,
+            'description' => 'required',
+            'date' => 'required',
+            'time' => 'required'
         ]);
+        $time = date('Y-m-d H-i-s', strtotime($request->time));
+
         //Cria uma aula
         $classroom = Classroom::create([
             'creator_id' => Auth::user()->id,
@@ -52,6 +56,8 @@ class RegisteredClassroomController extends Controller
             'theme_id' => $request->theme,
             'title' => $request->title,
             'description' => $request->description,
+            'date' => $request->date,
+            'time' => $time
             ]);
 
 

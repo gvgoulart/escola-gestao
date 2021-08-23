@@ -19,6 +19,8 @@ class CreateClassroomsTable extends Migration
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('theme_id');
             $table->string('title');
+            $table->dateTime('date');
+            $table->dateTime('time');
             $table->text('description');
             $table->timestamps();
 

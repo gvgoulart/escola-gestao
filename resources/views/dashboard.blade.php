@@ -43,6 +43,8 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">{{$classroom->theme->name}}</li>
                 <li class="list-group-item">{{$classroom->teacher->name}}</li>
+                <li class="list-group-item">{{$classroom->date->format('d/m/Y')}}</li>
+                <li class="list-group-item">{{$classroom->time->format('H:i:s')}}</li>
                 <li class="list-group-item">{{count($classroom->students)}} Alunos</li>
               </ul>
               <div class="card-body">

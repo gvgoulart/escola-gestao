@@ -81,7 +81,13 @@
             </div>
             <label for="description">Descrição da Aula</label>
               <textarea name="description" id="description" class="form-control"></textarea>
+              <div class="input-group mb-3">
+                <input type="date" name="date" required>
+                <input type="time" name="time" required>
+              </div>
                   <button type="submit" class="btn btn-primary btn-block">Criar Aula</button>
+
+
             </form>
       </div>
   </div>

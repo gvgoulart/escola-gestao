@@ -16,25 +16,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('users')->insert([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@gmail.com',
-        //     'password' => Hash::make('12345678'),
-        // ]);
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('12345678'),
+        ]);
 
-        // DB::table('users')->insert([
-        //     'name' => 'Professor',
-        //     'email' => 'professor@gmail.com',
-        //     'password' => Hash::make('12345678'),
-        //     //id 2
-        // ]);
-        // DB::table('users')->insert([
-        //     'name' => 'Aluno',
-        //     'email' => 'aluno@gmail.com',
-        //     'password' => Hash::make('12345678'),
-        //     //id 3
-        // ]);
-        // $this->call(LaratrustSeeder::class);   
+        DB::table('users')->insert([
+            'name' => 'Professor',
+            'email' => 'professor@gmail.com',
+            'password' => Hash::make('12345678'),
+            //id 2
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Aluno',
+            'email' => 'aluno@gmail.com',
+            'password' => Hash::make('12345678'),
+            //id 3
+        ]);
+        $this->call(LaratrustSeeder::class);   
         
         User::find(3)->attachRole('aluno'); // user aluno
         User::find(2)->attachRole('professor'); // user professor

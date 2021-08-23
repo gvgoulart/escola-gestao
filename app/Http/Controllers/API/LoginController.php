@@ -14,7 +14,7 @@ class LoginController extends Controller
 
             
             $data = $request->validate([
-                'name' => 'required',
+                'email' => 'required',
                 'password' => 'required'
             ]);
             

@@ -77,6 +77,10 @@
             </div>
 
               <textarea name="description" class="form-control">{{$classroom->description}}</textarea>
+              <div class="input-group mb-3">
+                <input value="{{$classroom->date->format('Y-m-d')}}"type="date" name="date" required>
+                <input value="{{$classroom->time->format('H:i:s')}}"type="time" name="time" required>
+              </div>
                   <button type="submit" class="btn btn-primary btn-block">Editar Aula</button>
             </form>
       </div>

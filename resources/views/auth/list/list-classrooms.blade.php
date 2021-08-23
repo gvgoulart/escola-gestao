@@ -44,6 +44,8 @@
                 <th>Criador</th>
                 <th>Professor</th>
                 <th>Matéria</th>
+                <th>Data</th>
+                <th>Horário</th>
                 <th>Editar</th>
                 <th>Excluir</th>
               </tr>
@@ -56,6 +58,8 @@
                 <td>{{$classroom->creator->name}}</td>
                 <td>{{$classroom->teacher->name}}</td>
                 <td>{{$classroom->theme->name}}</td>
+                <td>{{$classroom->date->format('d/m/Y')}}</td>
+                <td>{{$classroom->time->format('H:i:s')}}</td>
                 <td><a href="{{route('edit-classroom', ['id' => $classroom->id])}}"><i class="bi bi-pencil-square"></a></i></td>
                 <td><a href="{{route('delete-classroom', ['id' => $classroom->id])}}"><i class="bi bi-trash-fill"></i></a></td>
               </tr>
