@@ -81,7 +81,7 @@
             </div>
             <label for="description">Descrição da Aula</label>
               <textarea name="description" id="description" class="form-control"></textarea>
-                  <button type="submit" class="btn btn-primary btn-block">Editar Aula</button>
+                  <button type="submit" class="btn btn-primary btn-block">Criar Aula</button>
             </form>
       </div>
   </div>

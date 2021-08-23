@@ -30,42 +30,44 @@
     {{-- /.navbar aside--}}
 
 
-   {{-- Conteúdo da página --}}
+{{-- Conteúdo da página --}}
   <div class="content-wrapper">
-     {{-- Conteúdo do cabeçalho --}}
       <div class="content-header">
         <div id="classroom-container" class="row">
-        @foreach($classrooms as $classroom)
-      <div class="card col-md-4">
-        <div class="card-body">
-          <h5 class="card-title"><b>{{ $classroom->title }}</b></h5>
-          <p class="card-text">{{$classroom->description}}</p>
+          @foreach($classrooms as $classroom)
+            <div class="card col-md-4">
+              <div class="card-body">
+                <h5 class="card-title"><b>{{ $classroom->title }}</b></h5>
+                <p class="card-text">{{$classroom->description}}</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{$classroom->theme->name}}</li>
+                <li class="list-group-item">{{$classroom->teacher->name}}</li>
+                <li class="list-group-item">{{count($classroom->students)}} Alunos</li>
+              </ul>
+              <div class="card-body">
+                <a href="" class="btn btn-primary">Saber mais</a>
+                @if(Auth::user()->hasRole('aluno')) 
+                  <a href="{{route('request-classroom', ['id' => $classroom->id])}}" class="btn btn-primary">
+                    Participar
+                  </a> 
+                @endif
+              </div>
+            </div>
+          @endforeach
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{$classroom->theme->name}}</li>
-          <li class="list-group-item">{{$classroom->teacher->name}}</li>
-          <li class="list-group-item">{{count($classroom->students)}} Alunos</li>
-        </ul>
-        <div class="card-body">
-          <a href="" class="btn btn-primary">Saber mais</a>
-          @if(Auth::user()->hasRole('aluno')) 
-          <a href="{{route('request-classroom', ['id' => $classroom->id])}}" class="btn btn-primary">
-            Participar
-          </a> 
-          @endif
+        @if(session('msg'))
+        <div class="alert alert-success" role="alert">
+            {{session('msg')}}
         </div>
-      </div>
-      @endforeach
-
+        @endif
+      </div> 
     </div>
-      </div>
- 
-      
-  
-  </div>
-  {{-- /.Conteúdo do cabeçalho --}}
 
 
+{{-- Final conteúdo da página --}}
+
+{{--  Links  --}}
 <!-- jQuery -->
 <script src="{{asset('escola/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->

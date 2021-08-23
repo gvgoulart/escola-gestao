@@ -14,30 +14,39 @@ use App\Notifications\NotificationUser;
 class RegisteredClassroomUserController extends Controller
 {
     public function store($id, $user_id, $classroom_id) {
-        $notificationSelected = Notification::where('id',$id)->first()->delete();
+        //excluimos a notificação para não aparecer mais para o usuário
+         Notification::where('id',$id)->first()->delete();
 
+         //criamos a participação do aluno com a aula
         ClassroomUser::create([
             'user_id' => $user_id,
             'classroom_id' => $classroom_id
         ]);
 
+        //volta para a mesma página
         return redirect()->back();
     }
     public function deny(Request $request, $id, $user_id, $classroom_id) {
-
+        //encontramos o usuário e a aula
         $user = User::find($user_id);
         $classroom = Classroom::find($classroom_id);
 
+        if($request->reason == null) {
+            $request->reason = "O Professor não informou um motivo";
+        }
+        //armazenamos as informações que queremos para o aluno
         $notificationUser = ([
             'classroom' => $classroom,
             'reason' => $request->reason
         ]);
         
-
+        //notificamos o aluno
         $user->notify(new NotificationUser($notificationUser));
 
+        //excluimos a notificação
         Notification::where('id', $id)->delete();
 
+        //volta para a mesma página
         return redirect()->back();
     }
 }

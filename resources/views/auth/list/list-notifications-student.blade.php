@@ -46,20 +46,20 @@
             </thead>
             <tbody>
                 <tr>
-                    @if($theme != [])
-                        <td>{{$theme}}</td>
-                    @endif
-                    @if($reason != [])
-                        <td>{{$reason}}</td>
-                    @endif
-                    @if($notification != [])
-                        <td>
-                            <a href="{{route('markAsRead', ['id' => $notification->id])}}">
-                                <i class="bi bi-check-circle">
-                                </i>
-                            </a>
-                        </td>
-                    @endif
+                  @foreach(Auth::user()->unreadNotifications as $notification)
+                      @foreach($notification->data as $data)
+                        <tr>
+                            <td>{{$data['classroom']['title']}}</td>
+                            <td>{{$data['reason']}}</td>
+                            <td>
+                              <a href="{{route('markAsRead', ['id' => $notification->id])}}">
+                                  <i class="bi bi-check-circle">
+                                  </i>
+                              </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                  @endforeach
                 </tr>
             </tbody>
           </table>

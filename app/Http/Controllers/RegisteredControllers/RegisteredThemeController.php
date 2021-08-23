@@ -12,14 +12,15 @@ class RegisteredThemeController extends Controller
         return view ('auth.register.register-theme');
     }
     public function create (Request $request) {
+        //validamos o request
         $request->validate([
             'name' => 'required|string|max:255',
             ]);
-        
+        //criamos a matéria
         $theme = Theme::create([
             'name' => $request->name,
         ]);
-
+        //voltamos para a mesma página
         return redirect()->back();
     }
 }

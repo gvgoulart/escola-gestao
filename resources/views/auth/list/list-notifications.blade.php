@@ -61,7 +61,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a type="button" id="deny"
+                                <a type="button" id="{{$notification->id}}"
                                 style="color:red"  type="button">
                                     <i  class="bi bi-x-circle">
                                     </i>
@@ -113,27 +113,33 @@
   <script src="{{asset('escola/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
   <!-- AdminLTE App -->
   <script src="{{asset('escola/dist/js/adminlte.js')}}"></script>
-
+  @foreach(Auth::user()->unreadNotifications as $notification)
+  @foreach($notification->data as $data)
   <script>
-    @foreach($notifications as $notification)
-        @foreach($notification->data as $data)
       $(document).ready(function (){
-        $('#deny').one('click', function() {
+        var _clicked = false;
+        $('#{{$notification->id}}').click( function() {
+            if (!_clicked) {
+            _clicked = true;
+              $('#reason').append('<div class="input-group mb-3">' 
+            +'<input class="form-control" name="reason" type="text" placeholder="Motivo da recusa da aula {{$data['classroom_name']}}" aria-label="default input example">'
+           + '<input class="btn btn-success" type="submit">'
+           + '<button id="botao" class="btn btn-outline-danger">' 
+              +  '<i style="color:red" class="bi bi-patch-minus"></i>' 
+           + '</button>');
+          }
+          
+            
 
-            $('#reason').append('<div class="input-group mb-3">' 
-                                +'<input class="form-control" name="reason" type="text" placeholder="Motivo da recusa" aria-label="default input example">'
-                               + '<input class="btn btn-success" type="submit">'
-                               + '<button class="btn btn-outline-danger">' 
-                                  +  '<i style="color:red"id="botao" class="bi bi-patch-minus"></i>' 
-                               + '</button>')
-                @endforeach
-            @endforeach
             $('#botao').click(function() {
+                var _clicked = false;  
                 $('#reason').remove();
             });
         });
       });
   </script>
+  @endforeach
+  @endforeach
   </body>
   </html>
   

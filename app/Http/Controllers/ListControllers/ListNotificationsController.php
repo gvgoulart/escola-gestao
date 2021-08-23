@@ -11,6 +11,7 @@ class ListNotificationsController extends Controller
     public function index() {
         $notifications = [];
         
+        //se a contagem de notificações não lidas for maior que 0, a variavel notifications armazena as mesmas
         if(count(Auth::user()->unreadNotifications) > 0) { 
             $notifications = Auth::user()->unreadNotifications;
         }
@@ -19,26 +20,17 @@ class ListNotificationsController extends Controller
         return view('auth.list.list-notifications', ['notifications' => $notifications]);
     }
     public function indexStudent() {
+        //zeramos todas as variáveis para não dar erro na view
         $notifications = [];
-        $reason = [];
-        $theme = [];
-        $notification = [];
 
+        //Fazemos uma contagem, e adicionamos informações da notificação enviada pelo professor nas variaveis para informar ao aluno
         if(count(Auth::user()->unreadNotifications ) > 0) { 
-            $notifications = Auth::user()->unreadNotifications ;
-            foreach($notifications as $notification) {
-                $notification = $notification;
-                foreach($notification->data as $data) {
-                    $reason = $data['reason'];
-                    $theme = $data['classroom']['title'];
-                }
-            }
+            $notifications = Auth::user()->unreadNotifications;
         }
 
-        return view('auth.list.list-notifications-student', ['notification' => $notification,
-                                                        'reason' => $reason,
-                                                        'theme' => $theme]);
+        return view('auth.list.list-notifications-student', ['notifications' => $notifications]);
     }
+    
     public function markAsRead($id) {
          $notificationSelected = Notification::find($id)->delete();
 

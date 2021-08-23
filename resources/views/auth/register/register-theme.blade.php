@@ -42,7 +42,7 @@
                   <input type="text" class="form-control" name="name">
                 </div>
   
-                    <button type="submit" class="btn btn-primary btn-block">Editar Matéria</button>
+                    <button type="submit" class="btn btn-primary btn-block">Criar Matéria</button>
               </form>
         </div>
     </div>

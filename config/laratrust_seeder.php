@@ -16,15 +16,18 @@ return [
             'users' => 'c,r,u,d',
             'professor' => 'c,r,u,d',
             'aulas' => 'c,r,u,d',
-            'profile' => 'c,r,u,d'
+            'notifications' => 'c,r,u,d'
         ],
         'professor' => [
             'users' => 'c,r,u,d',
+            'professor' => 'r',
             'aulas' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'notifications' => 'c,r,u,d'
         ],
         'aluno' => [
             'profile' => 'r,u',
+            'aulas' => 'r',
+            'notifications' => 'r,d'
         ]
     ],
 

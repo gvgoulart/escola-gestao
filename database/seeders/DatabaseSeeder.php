@@ -16,23 +16,33 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'Vinicius',
-            'email' => 'vinicius@gmail.com',
-            'password' => Hash::make('12345678'),
-            //id 1
-        ]);
+        // DB::table('users')->insert([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => Hash::make('12345678'),
+        // ]);
 
-        DB::table('users')->insert([
-            'name' => 'Paulo',
-            'email' => 'paulo@gmail.com',
-            'password' => Hash::make('12345678'),
-            //id 2
-        ]);
-        $this->call(LaratrustSeeder::class);   
+        // DB::table('users')->insert([
+        //     'name' => 'Professor',
+        //     'email' => 'professor@gmail.com',
+        //     'password' => Hash::make('12345678'),
+        //     //id 2
+        // ]);
+        // DB::table('users')->insert([
+        //     'name' => 'Aluno',
+        //     'email' => 'aluno@gmail.com',
+        //     'password' => Hash::make('12345678'),
+        //     //id 3
+        // ]);
+        // $this->call(LaratrustSeeder::class);   
         
-        User::find(2)->attachRole('professor'); // user Paulo
-        User::find(1)->attachRole('admin'); // user Vinicius
+        User::find(3)->attachRole('aluno'); // user aluno
+        User::find(2)->attachRole('professor'); // user professor
+        User::find(1)->attachRole('admin'); // user admin
+
+        User::find(3)->attachPermissions([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]); // user aluno
+        User::find(2)->attachPermissions([1,2,3,4,6,9,10,11,12,13,14,15,16,17,18]); // user professor
+        User::find(1)->attachPermissions([10,14,16,17,18]); // user admin
 
         // \App\Models\User::factory(10)->create();
         
