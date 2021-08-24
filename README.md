@@ -1,3 +1,24 @@
+<h1>Tecnologias utilizadas</h1>
+<ul>
+    <li>PHP</li>
+    <li>Laravel</li>
+        <ol> 
+            <li>Laratrust(Roles, Permissions)</li>
+            <li>Laravel Passport(API OAuth 2.0)</li>
+            <li>Laravel Notifications(Notificações)</li>
+        </ol>
+<li>Javascript</li>
+    <ol>
+        <li>Jquery</li>
+     </ol>  
+<li>Css</li>
+    <ol>
+        <li>Bootstrap</li>
+        <li>AdminLTE(layout)</li>
+     </ol>  
+<li>HTML</li>
+</ul>
+
 <h1>Esquema do banco de dados</h1>
 
 ![image](https://user-images.githubusercontent.com/71338619/130551502-670e9f9e-0d94-4d0d-bb72-164b754c689d.png)
