@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
+    //função para alunos requisitar participação em uma aula
     public function requestParticipation($id) {
         //encontra a aula
         $classroom = Classroom::find($id);
@@ -34,6 +35,7 @@ class NotificationController extends Controller
         return response(['msg', 'Participação requisitada'], 200);
 
     }
+    //função para professores aceitar um aluno na aula
     public function store($id, $user_id, $classroom_id) {
         //excluimos a notificação para não aparecer mais para o professor
          Notification::where('id',$id)->first()->delete();
@@ -47,6 +49,7 @@ class NotificationController extends Controller
 
         return response(['message','Usuário esta participando da aula'],200);
     }
+    //função para professores recusar um aluno na aula
     public function deny(Request $request, $id, $user_id, $classroom_id) {
         //encontramos o usuário e a aula
         $user = User::find($user_id);
@@ -69,6 +72,7 @@ class NotificationController extends Controller
 
         return response(['message','Usuário notificado sobre a recusa'],200);
     }
+    //função para mostrar notificações
     public function index() {
         $notifications = [];
         
@@ -80,18 +84,7 @@ class NotificationController extends Controller
 
         return response($notifications);
     }
-    public function indexStudent() {
-        //zeramos todas as variáveis para não dar erro na view
-        $notifications = [];
-
-        //Fazemos uma contagem, e adicionamos informações da notificação enviada pelo professor nas variaveis para informar ao aluno
-        if(count(Auth::user()->unreadNotifications ) > 0) { 
-            $notifications = Auth::user()->unreadNotifications;
-        }
-
-        return view('auth.list.list-notifications-student', ['notifications' => $notifications]);
-    }
-    
+    //função para alunos lerem a notificação
     public function markAsRead($id) {
          $notificationSelected = Notification::find($id)->delete();
 
