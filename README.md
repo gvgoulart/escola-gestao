@@ -47,6 +47,7 @@ Observações:
     <li>Laravel</li>
         <ol> 
             <li>Laratrust(Roles, Permissions)</li>
+            <li>Laravel Breeze(Autenticação)</li>
             <li>Laravel Passport(API OAuth 2.0)</li>
             <li>Laravel Notifications(Notificações)</li>
         </ol>
