@@ -1,6 +1,6 @@
 Tarefas
 - [x] Criação do Banco de Dados (Usuários, Alunos, Professores, Aulas).
-- [ ](Apenas criado as permissões e designado para cada user) Criação do sistema de permissão dos usuários para cada ação do sistema.
+- [ ]Criação do sistema de permissão dos usuários para cada ação do sistema. (Apenas criado as permissões e designado para cada user) 
 - [x] Criação de CRUD para Usuários, Alunos, Professores, Aulas.
 - [x] Criar sistema de Login para Usuários administradores, Alunos e 
 Professores.
