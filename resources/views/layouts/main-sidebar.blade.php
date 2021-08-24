@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="{{route('dashboard')}}" class="brand-link">
-    <img src="{{asset('escola/dist/img/VTsJYUg_400x400.jpg')}}" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light"> </span>
+    <img src="{{asset('escola/dist/img/VT2sJYUg_400x400.jpg')}}" alt="Irroba Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light"> Irroba</span>
   </a>
 
   <nav class="mt-2">
