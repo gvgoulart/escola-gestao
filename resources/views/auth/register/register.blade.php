@@ -26,7 +26,7 @@
       <form action="{{route('registerStore')}}" method="post">
           @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" placeholder="Nome completo">
+          <input type="text" class="form-control" name="name" required placeholder="Nome completo">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email" placeholder="Email">
+          <input type="email" class="form-control" required name="email" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password">
+          <input type="password" class="form-control" required name="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
+          <input type="password" class="form-control" required placeholder="Retype password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-            <select name="role_id" class="form-control">
+            <select  required name="role_id" class="form-control">
               @if(Auth::user()->hasRole('professor'))
                 <option selected value="3">Aluno</option>
               @elseif(Auth::user()->hasRole('admin'))

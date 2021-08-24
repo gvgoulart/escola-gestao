@@ -39,7 +39,7 @@
               <form action="{{route('register-theme')}}" method="POST">
                 @csrf
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" name="name">
+                  <input required  placeholder="Nome da matéria" type="text" class="form-control" name="name">
                 </div>
   
                     <button type="submit" class="btn btn-primary btn-block">Criar Matéria</button>

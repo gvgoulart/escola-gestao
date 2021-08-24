@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ClassroomController;
 use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\ThemeController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
@@ -68,6 +69,22 @@ Route::middleware(['auth:api'])->group(function () {
 
     // Deleta classrooms
     Route::delete('classrooms/{id}', [ClassroomController::class,'destroy']);
+
+    //-----------------Notifications
+        // Armazena a notificação pra ser enviada ao professor
+        Route::get('notifications/{id}', [NotificationController::class, 'requestParticipation']);
+
+        // Armazena a notificação pra ser enviada ao aluno
+        Route::get('notifications/{id}/{user_id}/{classroom_id}', [NotificationController::class, 'store']);
+    
+        // Nega a requisição do aluno
+        Route::post('notifications/{id}/{user_id}/{classroom_id}', [NotificationController::class, 'deny']);
+    
+        // mostra as notificações de um usuário
+        Route::get('notifications', [NotificationController::class, 'index']);
+    
+        // Deleta notification
+        Route::get('notifications/{id}', [NotificationController::class,'markAsRead']);
 });
 
 

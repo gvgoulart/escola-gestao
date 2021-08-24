@@ -39,11 +39,11 @@
             <form action="{{route('classroom.create')}}" method="POST">
               @csrf
               <div class="form-floating mb-3">
-                <input type="text" class="form-control"  placeholder="Título da matéria"name="title">
+                <input required type="text" class="form-control"  placeholder="Título da matéria"name="title">
               </div>
 
               <div class="input-group mb-3">
-                  <select class="form-control" name="theme">
+                  <select required class="form-control" name="theme">
                     <option disabled selected value="">Selecione a matéria da aula</option>
                       @if($themes == [])
                         <option disabled value="">Não há materias cadastradas</option>
@@ -60,7 +60,7 @@
               </div>
 
               <div class="input-group mb-3">
-                <select class="form-control" name="teacher">
+                <select  required class="form-control" name="teacher">
                   <option disabled selected value="">Selecione o professor da aula</option>
                     @if(Auth::user()->hasRole('professor'))
                       <option selected value="{{Auth::user()->id}}">{{Auth::user()->name}}</option>
