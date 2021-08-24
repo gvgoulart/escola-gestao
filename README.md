@@ -92,3 +92,24 @@ Para geração das chaves de uso do passport:
 ```
 php artisan passport:install
 ```
+
+<h4>Caso a instalação do passport de erro siga os seguintes passos:</h4>
+```
+php artisan cache:clear
+```
+
+```
+php artisan config:clear
+```
+
+```
+composer dump-autoload
+```
+E se mesmo assim não der certo
+![image](https://user-images.githubusercontent.com/71338619/130554717-6dd846c5-a48e-494a-8d15-a9ff5ec51bdd.png)
+
+<p>Exclua a linha 28</p>
+```
+php artisan passport:install
+```
+E insira ela novamente
