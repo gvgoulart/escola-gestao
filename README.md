@@ -1,5 +1,5 @@
 <h1>O que foi pedido</h1>
-<h3>Tarefas: </h3>
+## Tarefas:
 - [x] Criação do Banco de Dados (Usuários, Alunos, Professores, Aulas).
 - [ ](Apenas criado as permissões e designado para cada user) Criação do sistema de permissão dos usuários para cada ação do sistema.
 - [x] Criação de CRUD para Usuários, Alunos, Professores, Aulas.
