@@ -1,7 +1,7 @@
-#O que foi pedido
-##Tarefas: 
+<h1>O que foi pedido</h1>
+<h3>Tarefas: </h3>
 - [x] Criação do Banco de Dados (Usuários, Alunos, Professores, Aulas).
-- [](Apenas criado as permissões e designado para cada user) Criação do sistema de permissão dos usuários para cada ação do sistema.
+- [ ](Apenas criado as permissões e designado para cada user) Criação do sistema de permissão dos usuários para cada ação do sistema.
 - [x] Criação de CRUD para Usuários, Alunos, Professores, Aulas.
 - [x] Criar sistema de Login para Usuários administradores, Alunos e 
 Professores.
@@ -10,15 +10,15 @@ deverá ser exibida como notificação para o professor responsável, e o
 mesmo deve aceitar ou recusar esse aluno na aula.
 - [x] Criação dos recursos de API Rest que possibilitem utilizar o sistema
 através de um aplicativo externo.
-- [] Utilizar Docker ou Sail (Laravel 8).
-- [] Hospedar o projeto em serviço de sua preferência (AWS, DigitalOcean,
+- [ ] Utilizar Docker ou Sail (Laravel 8).
+- [ ] Hospedar o projeto em serviço de sua preferência (AWS, DigitalOcean,
 Heroku, etc).
 - [x] Utilizar Git para gerenciar o projeto.
 - [x] Deve ser utilizado o Composer para gerenciar as dependências da 
 aplicação.
 - [x] Crie um README com orientações para a instalação.
 Informações a considerar:
-- [] No sistema de permissão, o usuário administrador deve conseguir editar 
+- [ ] No sistema de permissão, o usuário administrador deve conseguir editar 
 a permissão para cada ação do sistema, para determinados níveis de 
 usuário(Professor, Aluno).
 - [x] O sistema de login, deve possibilitar o login e cadastro para todos os 
