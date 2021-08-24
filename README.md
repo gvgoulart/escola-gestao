@@ -1,3 +1,9 @@
+<h1>Esquema do banco de dados</h1>
+
+![image](https://user-images.githubusercontent.com/71338619/130551502-670e9f9e-0d94-4d0d-bb72-164b754c689d.png)
+
+
+
 <h1>Instruções para instalação:</h1>
 
 Após a clonagem do repositório, fazer a instalação do composer na raíz do projeto:
