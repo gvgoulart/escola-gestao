@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
         <div class="img">
-			<img src="{{asset('escola/dist/img/LogoTipo-Irroba-Ecommerce.png')}}">
+			<img src="{{asset('escola/dist/img/png-clipart-php-php.png')}}">
 		</div>
 		<div class="login-content">
 			<form method="POST" action="{{ route('login') }}">

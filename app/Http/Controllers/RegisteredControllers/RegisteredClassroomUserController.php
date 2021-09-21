@@ -14,7 +14,7 @@ use App\Notifications\NotificationUser;
 class RegisteredClassroomUserController extends Controller
 {
     public function store($id, $user_id, $classroom_id) {
-        //excluimos a notificação para não aparecer mais para o usuário
+        //excluimos a notificação para não aparecer mais para o professor
          Notification::where('id',$id)->first()->delete();
 
          //criamos a participação do aluno com a aula
