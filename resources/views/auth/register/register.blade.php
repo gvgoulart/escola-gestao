@@ -18,7 +18,7 @@
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="{{route('dashboard')}}" class="h1"><b>Irroba</b>escola</a>
+      <a href="{{route('dashboard')}}" class="h1"><b>PHP</b>escola</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Registrar um novo aluno</p>
