@@ -114,3 +114,29 @@ Exclua a linha 28
 php artisan passport:install
 ```
 E insira ela novamente
+
+
+<h3> Caso queira utilizar pelo laradocker </h3>
+
+Entre na raiz do laradock
+```
+cd laradock
+```
+
+Copie o .env
+```
+cp .env.example .env
+```
+altere as portas como desejar e run nos containers
+
+```
+docker-compose up -d nginx mysql phpmyadmin redis workspace 
+```
+
+Altere o .env do projeto para
+
+```
+DB_HOST=mysql
+REDIS_HOST=redis
+QUEUE_HOST=beanstalkd
+```
